@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ArturSu TV — Welcome</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin:0; padding:0; }
+    :root {
+      --bg: #111827; --surface: #1f2937; --accent: #6366f1;
+      --accent-h: #818cf8; --text: #f9fafb; --muted: #9ca3af;
+    }
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", system-ui, sans-serif;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .card {
+      background: var(--surface);
+      border-radius: 24px;
+      padding: 64px 80px;
+      max-width: 900px;
+      text-align: center;
+      display: flex; flex-direction: column; align-items: center; gap: 32px;
+      border: 1px solid #374151;
+    }
+    .logo {
+      width: 120px; height: 120px;
+      border-radius: 30px;
+      background: linear-gradient(135deg, var(--accent), #a855f7);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 60px;
+      box-shadow: 0 0 60px rgba(99,102,241,0.4);
+    }
+    h1 {
+      font-size: 48px; font-weight: 800; letter-spacing: -1px;
+      background: linear-gradient(135deg, var(--accent-h), #c084fc);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    p { font-size: 22px; color: var(--muted); line-height: 1.7; }
+    .badge {
+      display: inline-block;
+      background: rgba(99,102,241,0.15);
+      border: 1px solid rgba(99,102,241,0.4);
+      color: var(--accent-h);
+      border-radius: 8px;
+      padding: 8px 20px;
+      font-size: 18px;
+      font-family: Consolas, monospace;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">&#127760;</div>
+    <h1>ArturSu TV App</h1>
+    <p>
+      This is the <strong>demo website</strong> loaded by the webOS app
+      from your GitHub repository.<br/>
+      Replace this file with your own <code>/site/index.html</code> content.
+    </p>
+    <div class="badge">github.com/Artur-Su/art-lg-webos-app-website</div>
+    <p style="font-size:18px;">&#127381; Edit <code>/site/index.html</code> in this repo to customise what appears on your TV.</p>
+  </div>
+</body>
+</html>
