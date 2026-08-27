@@ -1,0 +1,13 @@
+{
+  "id": "com.artursu.lgapp",
+  "version": "1.0.0",
+  "type": "web",
+  "title": "ArturSu TV App",
+  "iconUri": "https://raw.githubusercontent.com/Artur-Su/art-lg-webos-app-website/main/assets/largeIcon.png",
+  "sourceUrl": "https://github.com/Artur-Su/art-lg-webos-app-website",
+  "rootRequired": false,
+  "ipkUrl": "https://github.com/Artur-Su/art-lg-webos-app-website/releases/download/v1.0.0/com.artursu.lgapp_1.0.0_all.ipk",
+  "ipkHash": {
+    "sha256": ""
+  }
+}
