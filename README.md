@@ -4,26 +4,34 @@
 
 ---
 
+## Install via Homebrew Channel (Recommended)
+
+1. Open **Homebrew Channel** on your LG TV
+2. Go to **Settings** (gear icon)
+3. Go to **Add Repository**
+4. Enter this URL:
+   ```
+   https://raw.githubusercontent.com/Artur-Su/art-lg-webos-app-website/main/repo.json
+   ```
+5. The app **"ArturSu TV App"** will appear in the list — click **Install**
+
+---
+
 ## How it works
 
 ```
-Your LG TV
-  └─ ArturSu TV App (webOS .ipk)
-        │
-        ├─ reads  → /config.json          (this repo, optional)
-        └─ loads  → /site/index.html      (this repo, required)
-                          ↑
-              Fetched via raw.githubusercontent.com
-              and rendered in a fullscreen iframe
-```
+Homebrew Channel
+  └─ reads repo.json → finds com.artursu.lgapp
+       └─ downloads .ipk from GitHub Releases → installs on TV
 
-1. Install the `.ipk` on your TV via **Homebrew Channel**.
-2. Open the app — on first launch the **Settings** screen appears.
-3. Paste this repository URL:
-   ```
-   https://github.com/Artur-Su/art-lg-webos-app-website
-   ```
-4. Press **Save & Open** — the app fetches `/site/index.html` and shows it fullscreen.
+Your LG TV (after install)
+  └─ ArturSu TV App
+        │
+        ├─ reads  /config.json  (this repo)
+        └─ loads  /site/index.html  (this repo, fullscreen iframe)
+                          ↑
+              Fetched live via raw.githubusercontent.com
+```
 
 ---
 
@@ -31,63 +39,54 @@ Your LG TV
 
 ```
 art-lg-webos-app-website/
-├── README.md          ← you are here
-├── config.json        ← app configuration (optional overrides)
+├── README.md                        ← you are here
+├── repo.json                        ← Homebrew Channel repository index
+├── com.artursu.lgapp.manifest.json  ← app manifest for Homebrew Channel
+├── config.json                      ← app config (siteFolder, branch)
+├── assets/
+│   ├── icon.png
+│   └── largeIcon.png
 └── site/
-    ├── index.html     ← YOUR WEBSITE — edit this!
-    └── ...            ← CSS, JS, images, fonts, etc.
+    ├── index.html                   ← YOUR WEBSITE — edit this!
+    └── ...                          ← CSS, JS, images
 ```
-
----
-
-## config.json reference
-
-Located at the **root** of this repo. All fields are optional:
-
-```json
-{
-  "siteFolder": "site",
-  "branch":     "main",
-  "appName":    "ArturSu TV App"
-}
-```
-
-| Field | Default | Description |
-|-------|---------|-------------|
-| `siteFolder` | `"site"` | Folder containing your website |
-| `branch` | `"main"` | Git branch to load from |
-| `appName` | `"ArturSu TV App"` | Display name (future use) |
 
 ---
 
 ## Customising your website
 
-Edit **`/site/index.html`** — this is what gets displayed on your TV.
+Edit **`/site/index.html`** — this is displayed fullscreen on your TV.
 
-- You can use plain HTML, CSS, JavaScript
-- Reference assets relatively: `<img src="images/photo.jpg">` → put them in `/site/images/`
-- External CDN links (e.g. `https://cdn.jsdelivr.net/...`) work fine
-- The app injects a `<base>` tag so all relative paths resolve correctly via `raw.githubusercontent.com`
-
-> **Tip:** After pushing changes to GitHub, press the **🔴 Red** button on your remote to reload the site without reopening the app.
+- Use plain HTML, CSS, JavaScript
+- Reference assets relatively: `<img src="images/photo.jpg">` → put in `/site/images/`
+- External CDN links work fine
+- After pushing to GitHub, press **🔴 Red** on your remote to reload instantly
 
 ---
 
-## Installing the app (.ipk)
+## config.json
 
-### Option A — USB sideload (easiest)
-1. Download `com.artursu.lgapp_1.0.0_all.ipk` from the [Releases](../../releases) page
-2. Copy it to a USB drive (FAT32)
-3. Plug into your LG C1
-4. Open **Homebrew Channel** → **⚙ Settings** → install from USB
+```json
+{
+  "siteFolder": "site",
+  "branch": "main",
+  "appName": "ArturSu TV App"
+}
+```
 
-### Option B — Dev Mode (webOS CLI)
+| Field | Default | Description |
+|-------|---------|-------------|
+| `siteFolder` | `"site"` | Folder with your website |
+| `branch` | `"main"` | Git branch to load from |
+
+---
+
+## Manual install (.ipk)
+
+Download from [Releases](https://github.com/Artur-Su/art-lg-webos-app-website/releases/latest) and sideload via USB or Dev Mode.
+
 ```bash
-# Install webOS CLI
-npm install -g @webosose/ares-cli
-
-# Setup Dev Mode on your TV first, then:
-ares-setup-device
+# Via webOS CLI
 ares-install com.artursu.lgapp_1.0.0_all.ipk
 ```
 
@@ -97,12 +96,24 @@ ares-install com.artursu.lgapp_1.0.0_all.ipk
 
 | Button | Action |
 |--------|--------|
-| **Back** | Toggle between Settings and Player |
+| **Back** | Toggle Settings ↔ Player |
 | **🟢 Green** | Open Settings |
 | **🔴 Red** | Reload the website |
-| **D-pad ↑↓←→** | Navigate buttons |
+| **D-pad** | Navigate buttons |
 | **OK** | Confirm / Save |
-| **Magic Remote** | Move pointer over top bar to show controls |
+| **Magic Remote** | Move pointer to show top bar |
+
+---
+
+## Troubleshooting
+
+**Error 600 in Homebrew Channel** — Make sure you are using the full `repo.json` URL:
+```
+https://raw.githubusercontent.com/Artur-Su/art-lg-webos-app-website/main/repo.json
+```
+NOT the GitHub.com page URL.
+
+**Website not loading** — Make sure `/site/index.html` exists in the repo and the repo is public.
 
 ---
 
@@ -114,28 +125,7 @@ ares-install com.artursu.lgapp_1.0.0_all.ipk
 | Version | `1.0.0` |
 | Target | LG webOS TV (C1, C2, C3, OLED) |
 | Author | Artur Su |
-| Type | Web app (HTML/CSS/JS) |
 
 ---
 
-## Troubleshooting
-
-**❌ "Failed to Load Website"**
-- Make sure this repository is **public**
-- Verify `/site/index.html` exists
-- Check the repository URL has no typos
-- Press **Retry** or **Open Settings** to re-enter the URL
-
-**❌ Images / CSS not loading**
-- Use **relative paths** in your HTML (e.g. `./style.css` not `/style.css`)
-- Avoid absolute paths that reference `localhost` or private servers
-
-**❌ App not appearing after install**
-- Restart Homebrew Channel
-- Check that Dev Mode / Homebrew Channel is still active on your TV
-
----
-
-## License
-
-MIT — free to use, modify and redistribute.
+MIT License
